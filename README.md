@@ -68,15 +68,11 @@ Create the oai namespace.
 ```
 kubectl create ns oai
 ```
-
-From the oai-5gcn/charts folder execute the following,
-```
-$ helm install <name-of-mysql-deployment> mysql/ -n oai
-```
-which will first deploy the MYSQL pod. Once this has finished deploying change the MYSQL server IP parameter in AMF [values.yaml](oai-5gcn/charts/oai-amf/values.yaml). Next there are 8 different scripts that will automate the deployment of various slicing configurations. 
+There are 8 different scripts that will automate the deployment of various slicing configurations. Spefically,
 ```
 $ ./slice_conf<x>.sh
 ```
+also deploys the data network node at the end.
  
 
 
