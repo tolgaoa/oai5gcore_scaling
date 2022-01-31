@@ -62,17 +62,22 @@ tar -zxvf helm-v3.5.2-linux-amd64.tar.gz \
 sudo mv linux-amd64/helm /usr/local/bin/helm
 ```
 ## Step 4: Deploy
-From within the /charts directory, navigate to the helm templates of each of the following components -- "oai-nrf" , "oai-amf" , "oai-smf" , "oai-spgwu-tiny" -- and change the multus interfaces to the one on your local machine. 
+From within the /charts directory, navigate to the helm templates of each of the following components -- "oai-nrf" , "oai-amf" , "oai-smf" , "oai-spgwu-tiny, oai-gnbsim, oai-dnn" -- and change the multus interfaces to the one on your local machine. 
 
 Create the oai namespace.
 ```
 kubectl create ns oai
 ```
-There are 8 different scripts that will automate the deployment of various slicing configurations. Spefically,
+From the top directory, run
 ```
-$ ./slice_conf<x>.sh
+$ ./charts/slice_confx.sh <number of gNBSIM instances> 
 ```
-also deploys the data network node at the end.
+to automate the entire deployment. Later on 
+```
+$ ./charts/undeployall.sh <number of gNBSIM instances>
+```
+will undeploy everything. 
+
  
 
 
