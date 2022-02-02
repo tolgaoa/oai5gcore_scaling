@@ -97,7 +97,7 @@ config:
   ausfApiVersion: "v1"
   nfRegistration: "yes"
   smfSelection: "yes"
-  mySqlServer: "10.95.0.31"
+  mySqlServer: "10.42.0.7"
   mySqlUser: "root"
   mySqlPass: "linux"
   mySqlDb: "oai_db"
