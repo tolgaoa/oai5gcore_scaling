@@ -30,7 +30,7 @@ $ rke up
 ## Step 2: Preparing the Cluster
 Now that the cluster is deployed, it requires a network plugin for the OAI core and gNBSIM RAN to run on it, which is called Multus. 
 1. Set up kubectl on your workstation by following this [link](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/).
-2. The directory that you executed item 7 in Step 1 now contains the "kube_config_cluster.yml file", which is the configuration file of the cluster. Set up the access with
+2. The directory that you executed item 5 in Step 1 now contains the "kube_config_cluster.yml file", which is the configuration file of the cluster. Set up the access with
 ```
 $ mkdir -p ~/.kube \
   cp kube_config_cluster.yml ~/.kube/config.oaicnran \
