@@ -16,7 +16,7 @@ spec:
       labels:
         {{- include "oai-gnbsim.selectorLabels" . | nindent 8 }}
       annotations:
-        k8s.v1.cni.cncf.io/networks: {{ .Chart.Name }}-{{ .Values.namespace }}-ngap-net1, {{ .Chart.Name }}-{{ .Values.namespace }}-gtp-net2
+        k8s.v1.cni.cncf.io/networks: {{ .Chart.Name }}-{{ .Values.namespace }}-ngap-net1 #, {{ .Chart.Name }}-{{ .Values.namespace }}-gtp-net2
     spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}

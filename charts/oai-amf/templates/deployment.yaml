@@ -16,7 +16,10 @@ spec:
       labels:
         {{- include "oai-amf.selectorLabels" . | nindent 8 }}
       annotations:
-        k8s.v1.cni.cncf.io/networks: {{ .Chart.Name }}-{{ .Values.namespace }}-ngap-net1
+        k8s.v1.cni.cncf.io/networks: >-
+          [{
+                 "name": "{{ .Chart.Name }}-{{ .Values.namespace }}-ngap-net1"
+          }]
     spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}

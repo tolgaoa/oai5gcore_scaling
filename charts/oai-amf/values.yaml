@@ -50,9 +50,12 @@ start:
   #tcpdump: true
 
 multus:
-  ngapIPadd: "192.168.12.10"
+  ngapIPadd: "10.100.12.10"
+  ngapIP2add: "10.100.12.11"
   ngapNetmask: "16"
-  ngapGateway: "192.168.10.1"
+  ngapGw: "10.100.10.1"
+  hostInterface: "antrea-gw0"
+  #hostInterface: "eno1np0"
 
 config:
   instance: "0"
@@ -80,15 +83,15 @@ config:
   amfInterfaceNameForN11: "net1"
   smfInstanceId0: "1"
   #smffqdn0: "oai-smf1"
-  smfIpv4Addr0: "192.168.13.10"
+  smfIpv4Addr0: "10.100.13.10"
   smfHttpVersion0: "v1"
   smfInstanceId1: "2"
-  smfIpv4Addr1: "192.168.13.40"
+  smfIpv4Addr1: "10.100.13.40"
   smfHttpVersion1: "v1"
   smffqdn0: "smf"
   smffqdn1: "smf1"
   usefqdndns: "no"
-  nrfIpv4Addr: "192.168.11.10"
+  nrfIpv4Addr: "10.100.11.10"
   nrffqdn: "nrf"
   nrfPort: 80
   nrfApiVersion: "v1"
@@ -97,7 +100,7 @@ config:
   ausfApiVersion: "v1"
   nfRegistration: "yes"
   smfSelection: "yes"
-  mySqlServer: "10.42.0.19"
+  mySqlServer: "10.9.0.13"
   mySqlUser: "root"
   mySqlPass: "linux"
   mySqlDb: "oai_db"

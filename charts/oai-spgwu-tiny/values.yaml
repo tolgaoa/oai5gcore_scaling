@@ -49,22 +49,26 @@ start:
   spgwu: true
   tcpdump: true
 
+multus:
+  sgwS1uIp: "10.100.14.10"
+  sgwS1uNetmask: "16"
+  sgwSxIp: "10.100.15.10" #net2 IP address for UPF
+  sgwSxNetmask: "16"
+  sgwSxGw: "10.100.10.1"
+  sgwGw: "16"
+  pgwuSgiGw: "10.100.10.1"
+  hostInterface: "antrea-gw0"
+  #hostInterface: "eno1np0"
+
 config:
   pidDirectory: "/var/run"
-  sgwS1uIf: "net1"
-  sgwS1uIp: "192.168.14.10"
-  sgwS1uNetmask: "16"
-  sgwSxIf: "net2"
-  sgwSxIp: "192.168.15.10" #net2 IP address for UPF
-  sgwSxNetmask: "16"
-  sgwSxGw: "192.168.10.1"
-  sgwGw: "16"
-  pgwSgiIf: "net1"
-  pgwuSgiGw: "192.168.10.1"
+  sgwS1uIf: "net1" # net1 if gNB is outside the cluster network and multus creation is true else eth0
+  pgwSgiIf: "net1" # net1 if gNB is outside the cluster network and multus creation is true else eth0 (important because it sends the traffic towards internet)
+  sgwSxIf: "net1" # use for SMF communication
   netUeIp: "12.1.0.0/16" #UE IP address tunneled through external DNN
   netUeNatOption: "yes"
-  spgwc0IpAdd: "192.168.13.10" #SMF IP address
-  nrfIpv4Add: "192.168.11.10" #NRF IP address
+  spgwc0IpAdd: "10.100.13.10" #SMF IP address
+  nrfIpv4Add: "10.100.11.10" #NRF IP address
   nrfPort: "80"
   nrfApiVersion: "v1"
   registerNRF: "yes"

@@ -50,9 +50,11 @@ start:
   tcpdump: true
 
 multus:
-  n4IPadd: "192.168.13.10"
+  n4IPadd: "10.100.13.10"
   n4Netmask: "16"
-  n4Gw: "192.168.10.1"
+  n4Gw: "10.100.10.1"
+  hostInterface: "antrea-gw0"
+  #hostInterface: "eno1np0"
 
 config:
   instance: "0"
@@ -66,16 +68,16 @@ config:
   dnsSecIpv4Address: "8.8.4.4"
   registerNrf: "yes"
   discoverUpf: "yes"
-  amfIpv4Address: "192.168.12.10"
+  amfIpv4Address: "10.100.12.10"
   amfPort: "80"
   amfApiVersion: "v1"
   udmIpv4Address: "127.0.0.1"
   udmPort: "80"
   udmApiVersion: "v1"
-  nrfIpv4Address: "192.168.11.10"
+  nrfIpv4Address: "10.100.11.10"
   nrfPort : "80"
   nrfApiVersion: "v1"
-  upfIpv4Address: "192.168.14.10"
+  upfIpv4Address: "10.100.14.10"
   usefqdndns: "no"
   amffqdn: "oai-amf"  
   nrffqdn: "oai-nrf"

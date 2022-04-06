@@ -52,6 +52,15 @@ start:
   nrf: true
   #tcpdump: true
 
+multus:
+  nrfIpNg: "10.100.11.10"
+  #nrfGw: "192.100.10.1"
+  nrfGw: "10.100.10.1"
+  nrfNetmaskNg: "16"
+  hostInterface: "antrea-gw0"
+  #hostInterface: "eno1np0"
+        
+
 config:
   instance: "0"
   pidDirectory: "/var/run"
@@ -59,9 +68,6 @@ config:
   nrfInterfacePortForSBI: "80"
   nrfInterfaceHttp2PortForSBI: "9090"
   nrfApiVersion: "v1"
-  nrfIpNg: "192.168.11.10"
-  nrfGw: "192.168.10.1"
-  nrfNetmaskNg: "16"
 
 persistence:
   # make it true for the first time when you want to create persistance volume 
