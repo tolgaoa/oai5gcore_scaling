@@ -4,7 +4,7 @@ namespace: "oaicicd-tmp"
 
 image:
   registry: local
-  repository: tolgaomeratalay/oai-gnbsim #tolgaomeratalay/gnbsim 
+  repository: tolgaomeratalay/gnbsim #tolgaomeratalay/gnbsim 
   version: youtube4k
   pullPolicy: Always
 
