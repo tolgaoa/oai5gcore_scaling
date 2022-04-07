@@ -95,12 +95,33 @@ do
 			helm install gnbsim$gnbsimc charts/oai-gnbsim/ -n oai 
 			kubectl wait --for=condition=available --timeout=200s deployment/oai-gnbsim$gnbsimc -n oai	
 
-			sleep 30
+			sleep 20
 			gnbsimpod=$(kubectl get pods -n oai  | grep oai-gnbsim$gnbsimc | awk '{print $1}')
 			((gnbsimIP=$sim+1))
 			echo $gnbsimIP
-			kubectl exec -it -n oai $gnbsimpod -- ip route replace 10.100.20.12 via 0.0.0.0 dev net1 src 12.1.1.$gnbsimIP
+			#kubectl exec -it -n oai $gnbsimpod -- ip route replace 10.100.20.12 via 0.0.0.0 dev net1 src 12.1.1.$gnbsimIP
+			
+			#-----------------------------DNN Deployment--------------------------------------------------------------
+			sed -i "/name/c\  name: dnn-net$gnbsimc" charts/oai-dnn/01_multus.yaml
+			sed -i "/\"address\":/c\                        \"address\": \"10.100.20.$gnbsimc/16\"," charts/oai-dnn/01_multus.yaml
+			sed -i "4s/.*/  name: oai-dnn$gnbsimc/" charts/oai-dnn/02_deployment.yaml
+			sed -i "6s/.*/    app: oai-dnn$gnbsimc/" charts/oai-dnn/02_deployment.yaml
+			sed -i "11s/.*/      app: oai-dnn$gnbsimc/" charts/oai-dnn/02_deployment.yaml
+			sed -i "17s/.*/        app: oai-dnn$gnbsimc/" charts/oai-dnn/02_deployment.yaml
+			sed -i "19s/.*/        k8s.v1.cni.cncf.io\/networks: dnn-net$gnbsimc/" charts/oai-dnn/02_deployment.yaml
+			sed -i "26s/.*/        image: tolgaomeratalay\/oai-dnn:youtube4k/" charts/oai-dnn/02_deployment.yaml
+
+			kubectl apply -k charts/oai-dnn/
+			kubectl wait --for=condition=available --timeout=200s deployment/oai-dnn$gnbsimc -n oai
+			dnnpod=$(kubectl get pods -n oai  | grep oai-dnn | awk '{print $1}')
+			kubectl exec -it -n oai $dnnpod -- iptables -t nat -A POSTROUTING -o net1 -j MASQUERADE
+			kubectl exec -it -n oai $dnnpod -- ip route add 12.1.0.0/16 via 10.100.14.10 dev net1
+
+			kubectl exec -it -n oai $gnbsimpod -- ip route replace 10.100.20.$gnbsimc via 0.0.0.0 dev net1 src 12.1.1.$gnbsimIP
+			
+			#((gnbsimIP=$sim+1))
 			((gnbsimc+=1))
+
 		done
 		((supfc1+=1))
 		((supfc2+=1))
@@ -109,11 +130,5 @@ do
 	((nrfc+=1))
 done
 
-kubectl apply -k charts/oai-dnn/
-kubectl wait --for=condition=available --timeout=200s deployment/oai-dnn11 -n oai
-dnnpod=$(kubectl get pods -n oai  | grep oai-dnn | awk '{print $1}')
-kubectl exec -it -n oai $dnnpod -- iptables -t nat -A POSTROUTING -o net1 -j MASQUERADE
-kubectl exec -it -n oai $dnnpod -- ip route add 12.1.0.0/16 via 10.100.14.10 dev net1
-kubectl exec -it -n oai $dnnpod -- ping -c 2 12.1.1.2
 
 
