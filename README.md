@@ -1,4 +1,4 @@
-# OAI 5GC and RAN Deployment in K8s 
+# Scaling Network Slices with a 5G Testbed: A Resource Consumption Study 
  
 This is the implementation of the OpenAirInterface 5G core network and gNBSIM RAN in a Kubernetes cluster at a large-scale. Various stress tests and scaling experiments are conducted [WCNC 2022] 
 
