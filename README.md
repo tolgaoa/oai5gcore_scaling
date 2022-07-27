@@ -39,8 +39,8 @@ $ mkdir -p ~/.kube \
 3. Install the multus networking plugin from [here](https://github.com/k8snetworkplumbingwg/multus-cni) required for the OAI core network and RAN components. You can execute this from the workstation which has kubectl access to the target node where the cluster was set up.
 4. Make sure the required container networking plugins are installed on the target node. The installation of these plugins first requires go. 
 ```
-$ wget https://dl.google.com/go/go1.13.3.linux-amd64.tar.gz \ 
-  sudo tar -xvf go1.13.3.linux-amd64.tar.gz
+$ wget https://dl.google.com/go/go1.17.linux-amd64.tar.gz \ 
+  sudo tar -xvf go1.17.linux-amd64.tar.gz
   mv go /usr/local 
   export GOROOT=/usr/local/go
   export GOPATH=$HOME/Projects/Proj1
